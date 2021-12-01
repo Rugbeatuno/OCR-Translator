@@ -7,7 +7,9 @@ import io
 import cv2
 from googletrans import Translator
 import pinyin
+import numpy as np
 
+chinese = 'cht'
 
 class OCR:
     window_name = 'Translated'
@@ -25,8 +27,9 @@ class OCR:
 
     def annotate_image(self):
         img = cv2.imread(self.filepath)
-        pinyin_image = img.copy()
-        english_image = img.copy()
+        pinyin_mask = np.zeros_like(img)
+        english_mask = np.zeros_like(img)
+
 
         for line in self.lines:
             for word in line['Words']:
@@ -34,17 +37,22 @@ class OCR:
                 x = int(word['Left'])
                 y = int(word['Top'])
                 height = int(word['Height'])
-                # width = int(word['Width'])
+                width = int(word['Width'])
+
+                font_scale = width / 40
                 # cv2.rectangle(image, (x, y), (x+width, y+height), (0, 255, 255), -1)
-                cv2.putText(pinyin_image, self.get_pinyin(text), (x, y + height + 10), OCR.font, 0.75, (0, 0, 0), 1)
+                cv2.putText(pinyin_mask, self.get_pinyin(text), (int(x + width / 3), int(y + height / 2)), OCR.font, font_scale, (255, 255, 255), int(font_scale))
 
             line_text = line['LineText']
             x = int(line['Words'][0]['Left'])
             y = int(line['Words'][0]['Top'])
             height = int(line['Words'][0]['Height'])
+            width = int(line['Words'][0]['Width'])
+            font_scale = width / 25
+
             translated = self.translate_text(line_text)
-            cv2.putText(english_image, translated, (x, y + height + 10), OCR.font, 1, (0, 0, 0), 1)
-        return pinyin_image, english_image
+            cv2.putText(english_mask, translated, (int(x), int(y + height / 2)), OCR.font, font_scale, (255, 255, 255), 1)
+        return pinyin_mask, english_mask, img
 
     # compresses image and sends to OCR API and gets results
     def translate_image(self):
@@ -81,4 +89,7 @@ class OCR:
                 print(f'{char}  {pinyin.get(str(char))}')
 
     def print_text(self):
-        print(f'{self.translated_text} --> {self.translate_text(self.translated_text)}')
+        if self.language == chinese:
+            print(f'{self.translated_text} --> {self.translate_text(self.translated_text)}')
+        else:
+            print(self.translated_text)

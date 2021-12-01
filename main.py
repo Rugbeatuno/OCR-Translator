@@ -6,7 +6,7 @@ import os
 import shutil
 from datetime import datetime
 
-from OCR import OCR
+from OCR import OCR, chinese
 
 
 def check_recent_images(name):
@@ -28,6 +28,9 @@ def check_recent_images(name):
 
 home = str(pathlib.Path.home())
 cv2.namedWindow(OCR.window_name, cv2.WINDOW_AUTOSIZE)
+
+# language = input('Enter Language (cht): ') or chinese
+language = chinese
 def main():
     while True:
         desktop = (os.listdir(home + '/Desktop'))
@@ -36,12 +39,17 @@ def main():
 
             if check_recent_images(name):
                 shutil.move(full_path, '.')
-                ocr = OCR('cht', name)  # 'cht' - chinese traditional, 'chs' - chinese simplified
+                ocr = OCR(language, name)  # 'cht' - chinese traditional, 'chs' - chinese simplified
+
                 ocr.translate_image()
                 ocr.print_text()
-                ocr.print_pinyin()
-                horizontal = np.concatenate(ocr.annotate_image(), axis=1)
-                cv2.imshow(OCR.window_name, horizontal)
+                if language == chinese:
+                    ocr.print_pinyin()
+                    pinyin_mask, english_mask, original = ocr.annotate_image()
+                    pinyin = cv2.addWeighted(original, 0.2, pinyin_mask, 1, 0)
+                    english = cv2.addWeighted(original, 0.2, english_mask, 1, 0)
+                    horizontal = np.concatenate(np.array([pinyin, english]), axis=0)
+                    cv2.imshow(OCR.window_name, horizontal)
 
                 os.remove(f'./{name}')
 
