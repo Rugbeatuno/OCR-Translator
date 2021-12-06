@@ -9,6 +9,8 @@ from googletrans import Translator
 import pinyin
 import numpy as np
 
+from conversions import ocr_to_text, text_languages
+
 chinese = 'cht'
 
 class OCR:
@@ -18,8 +20,10 @@ class OCR:
     translator = Translator()
     font = cv2.FONT_HERSHEY_PLAIN
 
-    def __init__(self, lang, name):
-        self.language = lang
+    input_language = 'eng'
+    output_language = 'eng'
+
+    def __init__(self, name):
         self.filename = name
         self.filepath = f'./{self.filename}'
         self.lines = []
@@ -29,7 +33,6 @@ class OCR:
         img = cv2.imread(self.filepath)
         pinyin_mask = np.zeros_like(img)
         english_mask = np.zeros_like(img)
-
 
         for line in self.lines:
             for word in line['Words']:
@@ -63,7 +66,7 @@ class OCR:
         result = requests.post(OCR.url, files={self.filepath: file_bytes},
                                data={
                                    'apikey': OCR.key,
-                                   'language': self.language,
+                                   'language': OCR.input_language,
                                    'scale': True,
                                    'isOverlayRequired': True
                                })
@@ -78,7 +81,7 @@ class OCR:
             self.translated_text = "None Found."
 
     def translate_text(self, text):
-        return str(OCR.translator.translate(text, src='zh-tw', dest='en').text)
+        return str(OCR.translator.translate(text, src=text_languages[ocr_to_text[OCR.input_language]], dest=text_languages[ocr_to_text[OCR.output_language]]).text)
 
     def get_pinyin(self, text):
         return str(pinyin.get(text, format="strip"))  # change format to numerical for numbered pinyin
@@ -89,7 +92,7 @@ class OCR:
                 print(f'{char}  {pinyin.get(str(char))}')
 
     def print_text(self):
-        if self.language == chinese:
+        if self.input_language == chinese:
             print(f'{self.translated_text} --> {self.translate_text(self.translated_text)}')
         else:
             print(self.translated_text)

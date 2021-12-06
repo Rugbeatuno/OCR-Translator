@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c68eb70c-f1cc-4b91-81e1-9116def24407" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/OCR Translator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OCR Translator.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/conversions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/noimage.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OCR.py" beforeDir="false" afterPath="$PROJECT_DIR$/OCR.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screen Shot 2021-11-30 at 9.41.12 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screen Shot 2021-11-30 at 9.41.43 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screen Shot 2021-11-30 at 9.42.36 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +54,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="OCR" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OCR Translator" />
@@ -84,6 +94,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="gui" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="OCR Translator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -273,19 +304,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.main (1)" />
+      <item itemvalue="Python.main" />
       <item itemvalue="Python.main (2)" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.test (1)" />
-      <item itemvalue="Python.OCR" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.gui" />
+      <item itemvalue="Python.OCREngine" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.OCR" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.gui" />
+        <item itemvalue="Python.OCREngine" />
         <item itemvalue="Python.main (2)" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.test (1)" />
       </list>
     </recent_temporary>
   </component>

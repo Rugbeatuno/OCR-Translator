@@ -6,7 +6,8 @@ import os
 import shutil
 from datetime import datetime
 
-from OCR import OCR, chinese
+import gui
+import OCR
 
 
 def check_recent_images(name):
@@ -27,35 +28,48 @@ def check_recent_images(name):
 
 
 home = str(pathlib.Path.home())
-cv2.namedWindow(OCR.window_name, cv2.WINDOW_AUTOSIZE)
+cv2.namedWindow(OCR.OCR.window_name, cv2.WINDOW_AUTOSIZE)
 
-# language = input('Enter Language (cht): ') or chinese
-language = chinese
+language = OCR.chinese
+
+
 def main():
-    while True:
-        desktop = (os.listdir(home + '/Desktop'))
+    current_file = None
+    try:
+
+        while True:
+            gui.root.update()
+            # check_for_major_changes()
+
+            desktop = (os.listdir(home + '/Desktop'))
+            for name in desktop:
+                full_path = f'{home}/Desktop/{name}'
+
+                if check_recent_images(name):
+                    shutil.move(full_path, '.')
+                    if current_file:
+                        os.remove(current_file)
+                    current_file = name
+
+                    gui.translate(name)
+
+                    # if language == chinese:
+                    #     ocr.print_pinyin()
+                    #     pinyin_mask, english_mask, original = ocr.annotate_image()
+                    #     pinyin = cv2.addWeighted(original, 0.2, pinyin_mask, 1, 0)
+                    #     english = cv2.addWeighted(original, 0.2, english_mask, 1, 0)
+                    #     horizontal = np.concatenate(np.array([pinyin, english]), axis=0)
+                    #     cv2.imshow(OCR.window_name, horizontal)
+
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+    except:
+        # deletes all remaining images
+        desktop = (os.listdir('./'))
         for name in desktop:
-            full_path = f'{home}/Desktop/{name}'
-
-            if check_recent_images(name):
-                shutil.move(full_path, '.')
-                ocr = OCR(language, name)  # 'cht' - chinese traditional, 'chs' - chinese simplified
-
-                ocr.translate_image()
-                ocr.print_text()
-                if language == chinese:
-                    ocr.print_pinyin()
-                    pinyin_mask, english_mask, original = ocr.annotate_image()
-                    pinyin = cv2.addWeighted(original, 0.2, pinyin_mask, 1, 0)
-                    english = cv2.addWeighted(original, 0.2, english_mask, 1, 0)
-                    horizontal = np.concatenate(np.array([pinyin, english]), axis=0)
-                    cv2.imshow(OCR.window_name, horizontal)
-
+            if 'Screen Shot' in name:
                 os.remove(f'./{name}')
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
 
 print('OCR Ready')
 main()
