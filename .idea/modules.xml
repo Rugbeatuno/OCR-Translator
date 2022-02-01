@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/OCR Translator.iml" filepath="$PROJECT_DIR$/.idea/OCR Translator.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../Self Driving Car/.idea/Self Driving Car.iml" filepath="$PROJECT_DIR$/../Self Driving Car/.idea/Self Driving Car.iml" />
     </modules>
   </component>
 </project>
